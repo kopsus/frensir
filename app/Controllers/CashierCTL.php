@@ -22,6 +22,17 @@ class CashierCTL extends BaseController
         return view('kasir/index', ["menus" => $data, "categories" => $categories]);
     }
 
+    public function getKategori($id)
+    {
+        $category = $this->kategori->find($id);
+
+        if ($category) {
+            return $this->response->setJSON(['success' => true, 'category' => $category]);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Kategori tidak ditemukan']);
+        }
+    }
+
     public function menuByCategory($category_id)
     {
         $data = $this->produk->where('Category_id', $category_id)->findAll();

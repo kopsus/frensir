@@ -43,6 +43,7 @@ $routes->group('kasir', ['filter' => ['auth', 'role:Kasir']], function ($routes)
     $routes->post('kategori/add', 'CashierCTL::kategoriAdd');
     $routes->post('kategori/update', 'CashierCTL::kategoriUpdate');
     $routes->delete('kategori/delete/(:num)', 'CashierCTL::kategoriDelete/$1');
+    $routes->get('kategori/get/(:num)', 'CashierCTL::getKategori/$1');
     $routes->get('history', 'CashierCTL::history');
 });
 
