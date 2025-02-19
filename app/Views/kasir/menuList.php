@@ -84,7 +84,7 @@
     id="modal" 
     aria-hidden="true"
 >
-    <div class="bg-white rounded-lg w-9/12 sm:w-7/12 md:w-5/12 lg:w-3/8 scale-95 transition-transform duration-300 ease-out">
+    <div class="bg-white rounded-lg w-9/12 sm:w-7/12 md:w-5/12 lg:w-3/8 scale-95 transition-transform duration-300 ease-out h-[90vh] overflow-y-auto">
       <!-- Modal Header -->
       <div class="border-b border-stone-200 p-4 flex justify-between items-start">
         <div class="flex flex-col">

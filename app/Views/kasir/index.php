@@ -45,7 +45,6 @@
                         <img class="w-[12px] h-[12px]" src="<?= base_url('assets/magnifiers.svg') ?>" alt="icon" />
                         <input class="outline-none" id="search" name="search" type="text" placeholder="Search menu..." />
                     </div>
-                    <a href="<?= base_url('kasir/history') ?>" class="hover:cursor-pointer w-[120px] h-[45px] text-center font-bold text-white bg-[#8C0B40] rounded-lg flex justify-center items-center">History</a>
                     <button id="take_order_button" class="hover:cursor-pointer w-[140px] h-[45px] items-center font-bold text-white bg-[#8C0B40] rounded-lg">Take Order</button>
                 </div>
             </div>
@@ -58,7 +57,7 @@
                 </div>
                 <?php foreach ($categories as $category): ?>
                     <?php $isActive = (isset($currentCategoryId) && $currentCategoryId == $category['Category_id']) ? 'bg-[#BFB89E] text-white' : 'bg-[#F8F8F8]'; ?>
-                    <div class="category-filter hover:cursor-pointer flex flex-row items-center gap-[20px] h-full w-[144px] rounded-2xl <?= $isActive ?> font-semibold px-[10px]" data-category="<?= $category['Category_id'] ?>">
+                    <div class="category-filter hover:cursor-pointer flex flex-row items-center gap-[20px] h-full min-w-[144px] rounded-2xl text-nowrap <?= $isActive ?> font-semibold px-[10px]" data-category="<?= $category['Category_id'] ?>">
                         <?php
                         $svg = '';
                         if ($category['Category_name'] === 'Food') {
@@ -73,18 +72,7 @@
                         <p><?= $category['Category_name'] ?></p>
                     </div>
                 <?php endforeach; ?>
-                <!-- <div class="hover:cursor-pointer flex flex-row items-center gap-[20px] h-full w-[144px] rounded-2xl bg-[#F8F8F8] font-semibold px-[10px]">
-                    <img class="w-[47px] h-[47px]" src="<?= base_url('assets/food.svg') ?>" alt="icon"/>
-                    <p>Food</p>
-                </div>
-                <div class="hover:cursor-pointer flex flex-row items-center gap-[20px] h-full w-[144px] rounded-2xl bg-[#F8F8F8] font-semibold px-[10px]">
-                    <img class="w-[47px] h-[47px]" src="<?= base_url('assets/drink.svg') ?>" alt="icon"/>
-                    <p>Drink</p>
-                </div>
-                <div class="hover:cursor-pointer flex flex-row items-center gap-[20px] h-full w-[197px] rounded-2xl bg-[#F8F8F8] font-semibold px-[10px]">
-                    <img class="w-[47px] h-[47px]" src="<?= base_url('assets/sidedish.svg') ?>" alt="icon"/>
-                    <p>Side Dish</p>
-                </div> -->
+                
             </div>
             <!-- items -->
             <div class="overflow-x-hidden overflow-y-auto grid grid-cols-6 md:grid-cols-4 gap-y-[38px] gap-x-[28px] w-full pr-[72px] max-h-[684px]">
