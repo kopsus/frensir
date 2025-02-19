@@ -134,6 +134,10 @@ class MidtransCTL extends BaseController
 
             // Kurangi stok produk
             $newStock = $produk['Stok'] - $detail['Jumlah_Produk'];
+            $categoryData = [
+                'Stok' => $newStock
+            ];
+            $this->produk->update($produk['Produk_id'], $categoryData);
             if ($newStock < 0) {
                 return $this->response->setJSON(['error' => 'Stok tidak cukup untuk produk ' . $produk['Nama_Produk']]);
             }
