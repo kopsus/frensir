@@ -40,13 +40,13 @@
             <!-- header -->
             <div class="relative flex flex-row justify-between items-center w-full pr-[70px]">
                 <img src="<?= base_url('assets/FrensirLogo.svg') ?>" alt="logo" class="w-[108px] h-[52px]"/>
-                <div class="flex flex-row justify-between w-[474px] h-[45px] gap-[31px]">
+                <div class="flex flex-row justify-between w-[474px] h-[45px] gap-5">
                     <div class="w-[323px] relative gap-2 rounded-lg flex flex-row px-[22px] items-center shadow-[0_0_15px_4px_rgba(255,192,203,1)] ">
                         <img class="w-[12px] h-[12px]" src="<?= base_url('assets/magnifiers.svg') ?>" alt="icon" />
                         <input class="outline-none" id="search" name="search" type="text" placeholder="Search menu..." />
                     </div>
-                    <a href="<?= base_url('kasir/history') ?>" class="hover:cursor-pointer w-[120px] h-[45px] text-center font-bold text-white bg-[#8C0B40] rounded-lg">History</a>
-                    <button id="take_order_button" class="hover:cursor-pointer w-[120px] h-[45px] items-center font-bold text-white bg-[#8C0B40] rounded-lg">Take Order</button>
+                    <a href="<?= base_url('kasir/history') ?>" class="hover:cursor-pointer w-[120px] h-[45px] text-center font-bold text-white bg-[#8C0B40] rounded-lg flex justify-center items-center">History</a>
+                    <button id="take_order_button" class="hover:cursor-pointer w-[140px] h-[45px] items-center font-bold text-white bg-[#8C0B40] rounded-lg">Take Order</button>
                 </div>
             </div>
             <!-- nav -->
@@ -120,7 +120,6 @@
                             </div>
                         </div>                        
                         <!-- (4) total items -->
-                        <div>
                             <div class="w-full bg-white flex flex-col gap-3 rounded-b-2xl">
                                 <div class="flex flex-row w-full justify-between font-semibold pt-4 px-20">
                                     <p>Subtotal</p>
@@ -142,7 +141,6 @@
                                     <p id="final_total">Rp0</p>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
                 <div class="flex justify-center items-center relative z-30">
