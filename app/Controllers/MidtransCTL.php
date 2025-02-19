@@ -66,7 +66,7 @@ class MidtransCTL extends BaseController
 
         // Process Midtrans
         $transaction_details = array (
-            'order_id' => $order_id,
+            'order_id' => rand(),
             'gross_amount' => $totalHarga, //must rounded
         );
 
