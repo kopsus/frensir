@@ -29,7 +29,7 @@
                         <img class="w-[12px] h-[12px]" src="<?= base_url('assets/magnifiers.svg') ?>" alt="icon" />
                         <input class="outline-none" id="seach" name="search" type="text" placeholder="Search kategori..." />
                     </div>
-                    <button id="modalAdd" class="w-[120px] h-[45px] items-center font-bold text-white bg-[#8C0B40] rounded-lg hover:cursor-pointer">Add Kategori</button>
+                    <!-- <button id="modalAdd" class="w-[120px] h-[45px] items-center font-bold text-white bg-[#8C0B40] rounded-lg hover:cursor-pointer">Add Kategori</button> -->
                 </div>
             </div>
             <div class="w-full max-h-[758px] overflow-y-auto overflow-x-hidden bg-white">
@@ -39,7 +39,7 @@
                         <div class="w-1/12"></div> <!-- Empty space for checkbox alignment -->
                         <p class="w-1/12">No</p>
                         <p class="w-4/12">Kategori</p>
-                        <p class="w-2/12">Action</p>
+                        <!-- <p class="w-2/12">Action</p> -->
                     </div>
                     <!-- Body -->
                     <?php $no = 1; ?>
@@ -48,11 +48,11 @@
                             <input type="checkbox" class="w-1/12" />
                             <p class="w-1/12"><?= $no++ ?></p>
                             <p class="w-4/12 mr-4 truncate" id="Category_name" name="Category_name"><?= $category['Category_name'] ?></p>
-                            <div class="flex w-2/12 gap-3">
+                            <!-- <div class="flex w-2/12 gap-3">
                                 <button data-id="<?= $category['Category_id'] ?>" class="edited hover:cursor-pointer bg-[#E5EEFF] border border-[#C2E9FF] rounded-lg items-center p-1"><img src="<?= base_url('assets/material-symbols_edit.svg') ?>" alt="icon"/></button>
                                 <button data-id="<?= $category['Category_id'] ?>" class="delete hover:cursor-pointer bg-[#FFE5E5] border border-[#FFC2C2] rounded-lg items-center p-1"><img src="<?= base_url('assets/mdi_trash.svg') ?>" alt="icon"/></button>
                                 <button class="ml-4"><img src="<?= base_url('assets/three-dots.svg') ?>" alt="icon"/></button>
-                            </div>
+                            </div> -->
                         </div>
                     <?php endforeach; ?>
                 </div>

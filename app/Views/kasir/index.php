@@ -52,19 +52,25 @@
             <!-- nav -->
             <div class="w-[776px] h-[63px] flex flex-row gap-[34px]">
                 <?php $isAllActive = empty($currentCategoryId) ? 'bg-[#BFB89E] text-white' : 'bg-[#F8F8F8]'; ?>
-                <div class="hover:cursor-pointer flex flex-row items-center gap-[20px] h-full w-[144px] rounded-2xl <?= $isAllActive ?> font-semibold px-[10px]">
-                    <a href="<?= base_url('kasir') ?>" class="flex flex-row items-center gap-[10px] w-full h-full">
-                        <img class="w-[47px] h-[47px]" src="<?= base_url('assets/all-food.svg') ?>" alt="icon"/>
-                        <p>All</p>
-                    </a>
+                <div class="category-filter hover:cursor-pointer flex flex-row items-center gap-[20px] h-full w-[144px] rounded-2xl <?= $isAllActive ?> font-semibold px-[10px]" data-category="all">
+                    <img class="w-[47px] h-[47px]" src="<?= base_url('assets/all-food.svg') ?>" alt="icon"/>
+                    <p>All</p>
                 </div>
                 <?php foreach ($categories as $category): ?>
                     <?php $isActive = (isset($currentCategoryId) && $currentCategoryId == $category['Category_id']) ? 'bg-[#BFB89E] text-white' : 'bg-[#F8F8F8]'; ?>
-                    <div class="hover:cursor-pointer flex flex-row items-center gap-[20px] h-full w-[144px] rounded-2xl <?= $isActive ?> font-semibold px-[10px]">
-                        <a href="<?= base_url('kasir/menu/category/' . $category['Category_id']) ?>" class="flex flex-row items-center gap-[10px] w-full h-full">
-                            <img class="w-[47px] h-[47px]" src="<?= base_url('assets/drink.svg') ?>" alt="icon"/>
-                            <p><?= $category['Category_name'] ?></p>
-                        </a>
+                    <div class="category-filter hover:cursor-pointer flex flex-row items-center gap-[20px] h-full w-[144px] rounded-2xl <?= $isActive ?> font-semibold px-[10px]" data-category="<?= $category['Category_id'] ?>">
+                        <?php
+                        $svg = '';
+                        if ($category['Category_name'] === 'Food') {
+                            $svg = 'food.svg';
+                        } else if ($category['Category_name'] === 'Drink') {
+                            $svg = 'drink.svg';
+                        } else if ($category['Category_name'] === 'Side Dish') {
+                            $svg = 'sidedish.svg';
+                        }
+                        ?>
+                        <img class="w-[47px] h-[47px]" src="<?= base_url('assets/' . $svg) ?>" alt="icon"/>
+                        <p><?= $category['Category_name'] ?></p>
                     </div>
                 <?php endforeach; ?>
                 <!-- <div class="hover:cursor-pointer flex flex-row items-center gap-[20px] h-full w-[144px] rounded-2xl bg-[#F8F8F8] font-semibold px-[10px]">
@@ -83,16 +89,17 @@
             <!-- items -->
             <div class="overflow-x-hidden overflow-y-auto grid grid-cols-6 md:grid-cols-4 gap-y-[38px] gap-x-[28px] w-full pr-[72px] max-h-[684px]">
                 <?php foreach ($menus as $menu): ?>
-                    <div id="body" class="menu-item hover:cursor-pointer w-[204px] bg-[#FBFBFB] flex flex-col px-[10px] pt-[10px] pb-[18px] min-h-[236px]"
+                    <div class="menu-item hover:cursor-pointer w-[204px] bg-[#FBFBFB] flex flex-col px-[10px] pt-[10px] pb-[18px] min-h-[236px]"
                         data-id="<?= $menu['Produk_id'] ?>"
                         data-name="<?= $menu['Nama_Produk'] ?>"
                         data-price="<?= $menu['Harga'] ?>"
                         data-description="<?= $menu['Rasa'] ?>"
                         data-image="<?= base_url('images/') . $menu['Gambar_Produk'] ?>"
+                        data-category="<?= $menu['Category_id'] ?>"
                     >
                         <img class="w-[184px] h-[129px] object-cover drop-shadow-xl flex rounded-2xl" src="<?= base_url('images/') . $menu['Gambar_Produk'] ?>" alt="icon"/>
                         <div class="items-start">
-                            <p id="Nama_Produk" class="line-clamp-1 font-medium text-[18px] mt-[16px] mb-[10px]"><?= $menu['Nama_Produk'] ?></p>
+                            <p class="nama-produk line-clamp-1 font-medium text-[18px] mt-[16px] mb-[10px]"><?= $menu['Nama_Produk'] ?></p>
                             <p><span class="font-extrabold text-[14px] text-[#8C0B40]">Rp.<?= number_format($menu['Harga'], 0, ',', '.') ?></span><span class="text-[14px] font-semibold text-[#B2AB90]">/pc</span></p>
                         </div>
                     </div>
@@ -251,6 +258,24 @@ $(document).ready(function(){
         });
     });
 
+    var selectedCategory = "all";
+    $('.category-filter').on('click', function() {
+        $('.category-filter').removeClass('bg-[#BFB89E] text-white').addClass('bg-[#F8F8F8]');
+        $(this).removeClass('bg-[#F8F8F8]').addClass('bg-[#BFB89E] text-white');
+
+        selectedCategory = $(this).data('category');
+
+        $('.menu-item').each(function() {
+            var itemCategory = $(this).data('category');
+
+            if (selectedCategory === "all" || selectedCategory == itemCategory) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
     // handle take order
     $('#modal_take_order_submit').on('click', function(e){
         e.preventDefault();
@@ -382,6 +407,7 @@ document.getElementById('addorder').addEventListener('click', function(){
     const order = {
         id: currentMenuId,
         name: document.getElementById('modalProductName').innerText,
+        image: document.getElementById('modalImage').src,
         price: parsePrice(document.getElementById('modalPrice').innerText),
         total_price: parsePrice(document.getElementById('totalPrice').innerText),
         quantity: parseInt(document.getElementById('totalItems').innerText)
@@ -442,7 +468,7 @@ function renderCart() {
       <div class="relative flex w-full flex-col gap-4 rounded-t-2xl bg-[#FFFBF0] px-4 pt-4">
           <div class="flex flex-row gap-4">
               <div class="w-2/4 place-items-center">
-                  <img class="w-[67px] h-[67px] object-cover rounded-lg" src="<?= base_url('images/sample-food.png') ?>" />
+                  <img class="w-[67px] h-[67px] object-cover rounded-lg" src="${order.image}" />
               </div>
               <div class="flex w-2/1 flex-col">
                   <div class="mb-6 flex w-full justify-between font-semibold">
@@ -472,7 +498,7 @@ function renderCart() {
       <div class="relative flex w-full flex-col gap-4 bg-[#FFFBF0] px-4 pt-4">
           <div class="flex flex-row gap-4">
               <div class="w-2/4 place-items-center">
-                  <img class="w-[67px] h-[67px] object-cover rounded-lg" src="<?= base_url('images/sample-food.png') ?>" />
+                  <img class="w-[67px] h-[67px] object-cover rounded-lg" src="${order.image}" />
               </div>
               <div class="flex w-2/1 flex-col">
                   <div class="mb-6 flex w-full justify-between font-semibold">
@@ -495,7 +521,7 @@ function renderCart() {
       <div class="relative flex w-full flex-col gap-4 bg-[#FFFBF0] px-4 pt-4">
           <div class="flex flex-row gap-4">
               <div class="w-2/4 place-items-center">
-                  <img class="w-[67px] h-[67px] object-cover rounded-lg" src="<?= base_url('images/sample-food.png') ?>" />
+                  <img class="w-[67px] h-[67px] object-cover rounded-lg" src="${order.image}" />
               </div>
               <div class="flex w-2/1 flex-col">
                   <div class="mb-6 flex w-full justify-between font-semibold">
