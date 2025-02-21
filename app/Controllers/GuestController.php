@@ -16,18 +16,32 @@ class GuestController extends BaseController
     }
 
     public function index()
-    {
-        $data = $this->produk->findAll();
-        $categories = $this->kategori->findAll();
-        return view('guest/index', ['menus' => $data, "categories" => $categories]);
-    }
+{
+    $data = $this->produk->findAll();
+    $categories = $this->kategori->findAll();
+    $activeCategory = 'all'; // Tambahkan variabel ini
+
+    return view('guest/index', [
+        'menus' => $data,
+        'categories' => $categories,
+        'activeCategory' => $activeCategory
+    ]);
+}
+
 
     public function menuByCategory($category_id)
-    {
-        $data = $this->produk->where('Category_id', $category_id)->findAll();
-        $categories = $this->kategori->findAll();
-        return view('guest/index', ["menus" => $data, "categories" => $categories]);
-    }
+{
+    $data = $this->produk->where('Category_id', $category_id)->findAll();
+    $categories = $this->kategori->findAll();
+    $activeCategory = $category_id; // Tambahkan variabel ini
+
+    return view('guest/index', [
+        'menus' => $data,
+        'categories' => $categories,
+        'activeCategory' => $activeCategory
+    ]);
+}
+
 
     public function detailProduct()
     {

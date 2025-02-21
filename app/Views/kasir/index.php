@@ -71,11 +71,10 @@
                         <img class="w-[47px] h-[47px]" src="<?= base_url('assets/' . $svg) ?>" alt="icon"/>
                         <p><?= $category['Category_name'] ?></p>
                     </div>
-                <?php endforeach; ?>
-                
+                <?php endforeach; ?>     
             </div>
             <!-- items -->
-            <div class="overflow-x-hidden overflow-y-auto grid grid-cols-6 md:grid-cols-4 gap-y-[38px] gap-x-[28px] w-full pr-[72px] max-h-[684px]">
+            <div class="overflow-x-hidden overflow-y-auto grid grid-cols-6 md:grid-cols-4 gap-32  w-full pr-[72px] max-h-[684px]">
                 <?php foreach ($menus as $menu): ?>
                     <div class="menu-item hover:cursor-pointer w-[204px] bg-[#FBFBFB] flex flex-col px-[10px] pt-[10px] pb-[18px] min-h-[236px]"
                         data-id="<?= $menu['Produk_id'] ?>"
@@ -348,22 +347,6 @@ document.querySelectorAll('.menu-item').forEach(item => {
 document.getElementById('take_order_button').addEventListener('click', function(){
     showModal('modal_take_order');
 });
-
-// document.getElementById('confirm_order').addEventListener('click', function(){
-//     console.log("items in cart: ", orders);
-//     showModal('modal_customer_name');
-//     create Orders Code
-//     fetch('kasir/check_code')
-//     .then(response => response.json())
-//     .then(data => {
-//         // Tampilkan order code yang diterima dari controller
-//         // document.getElementById('orderCodeDisplay').innerText = data.order_code;
-//         alert("order code created: " + data.order_code)
-//     })
-//     .catch(error => {
-//         console.error('Error:', error);
-//     });
-// });
 
 // Event listener untuk tombol increase
 document.getElementById('increase').addEventListener('click', function(){

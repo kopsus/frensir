@@ -34,9 +34,6 @@
         <div class="w-full bg-[#FFFBF0] flex flex-col gap-[25px] py-[133px] pl-[30px]">
             <!-- header -->
             <div class="relative flex flex-row justify-between items-center w-full pr-[70px]">
-                <a href="<?= base_url('kasir/kategori') ?>">
-                    <p class="w-[120px] h-[45px] items-center font-bold text-white bg-[#8C0B40] rounded-lg hover:cursor-pointer flex justify-center items-center">Kategori</p>
-                </a>
                 <p class="font-bold text-[36px] text-[#8C0B40] ">Menu List</p>
                 <div class="flex flex-row justify-between w-[474px] h-[45px] gap-[31px]">
                     <div class="w-[323px] relative gap-2 rounded-lg flex flex-row px-[22px] items-center shadow-[0_0_15px_4px_rgba(255,192,203,1)] ">
