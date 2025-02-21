@@ -89,20 +89,26 @@ $(document).ready(function(){
                     html += '</thead>';
                     html += '<tbody>';
                     
-                    $.each(response, function(index, detail) {
+                    $.each(response.details, function(index, detail) {
                         html += '<tr>';
                         html += '<td class="px-2 py-1">' + detail.namaProduk + '</td>';
-                        html += '<td class="px-2 py-1">Rp' + parseFloat(detail.harga).toLocaleString('id-ID', { maximumFractionDigits: 0 }) + '</td>';
+                        html += '<td class="px-2 py-1">Rp' + parseFloat(detail.harga).toLocaleString('id-ID') + '</td>';
                         html += '<td class="px-2 py-1">' + detail.jumlah + '</td>';
-                        html += '<td class="px-2 py-1">Rp' + parseFloat(detail.total).toLocaleString('id-ID', { maximumFractionDigits: 0 }) + '</td>';
+                        html += '<td class="px-2 py-1">Rp' + parseFloat(detail.total).toLocaleString('id-ID') + '</td>';
                         html += '</tr>';
                     });
-                    
+
                     html += '</tbody>';
                     html += '</table>';
+
+                    html += '<div class="mt-4 p-4 border-t">';
+                    html += '<p class="text-right">Subtotal: Rp' + parseFloat(response.subtotal).toLocaleString('id-ID') + '</p>';
+                    html += '<p class="text-right">Tax: Rp' + parseFloat(response.tax).toLocaleString('id-ID') + '</p>';
+                    html += '<p class="text-right font-bold">Total: Rp' + parseFloat(response.total).toLocaleString('id-ID') + '</p>';
                     html += '</div>';
-                    console.log("here html: ", html);
-                    // Hapus kelas 'hidden', sembunyikan dulu, sisipkan HTML, lalu tampilkan dengan slideDown
+
+                    html += '</div>';
+                    
                     detailDiv.removeClass('hidden').hide().html(html).slideDown(400);
                 },
                 error: function(xhr, status, error){

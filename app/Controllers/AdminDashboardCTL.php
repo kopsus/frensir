@@ -244,17 +244,31 @@ class AdminDashboardCTL extends BaseController
         $orderId = $order['Order_id'];
         $details = $this->detail_order->where('Order_id', $orderId)->findAll();
         $detailsData = [];
+        $subtotal = 0;
+        
         foreach ($details as $detail) {
             $produk = $this->produk->find($detail['Produk_id']);
             if ($produk) {
+                $totalItem = $produk['Harga'] * $detail['Jumlah_Produk'];
+                $subtotal += $totalItem;
+                
                 $detailsData[] = [
                     'namaProduk' => $produk['Nama_Produk'],
                     'harga'      => $produk['Harga'],
                     'jumlah'     => $detail['Jumlah_Produk'],
-                    'total'      => $produk['Harga'] * $detail['Jumlah_Produk'],
+                    'total'      => $totalItem,
                 ];
             }
         }
-        return $this->response->setJSON($detailsData);
+
+        $tax = $subtotal * 0.10;
+        $total = $subtotal + $tax;
+
+        return $this->response->setJSON([
+            'details'  => $detailsData,
+            'subtotal' => $subtotal,
+            'tax'      => $tax,
+            'total'    => $total
+        ]);
     }
 }
