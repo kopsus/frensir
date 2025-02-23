@@ -79,7 +79,7 @@ $(document).ready(function() {
       const orderHtml = `
         <div class="relative flex flex-row gap-[12px] w-full" data-index="${index}">
           <img class="absolute -top-2 -left-2 w-[24px] h-[24px] z-10 close-btn" src="<?= base_url('assets/mobile/close-button.svg') ?>" alt="icon" />
-          <img class="w-[57px] h-[59px] rounded-lg object-cover z-0" src="<?= base_url('images/sample-food.png') ?>" alt="product image" />
+          <img class="w-[57px] h-[59px] rounded-lg object-cover z-0" src="<?= base_url('images/') ?>${item.Gambar_Produk}" alt="product image" />
           <div class="flex flex-row justify-between w-full">
             <div class="flex flex-col gap-[10px]">
               <div>

@@ -43,7 +43,7 @@
                 <?php endfor; ?>
             </div>
             <!-- image -->
-            <img class="w-[105px] h-[109px] absolute right-10 -top-14 z-20 object-cover rounded-lg" src="<?= base_url('images/sample-food.png') ?>" alt="logo" />
+            <img class="w-[105px] h-[109px] absolute right-10 -top-14 z-20 object-cover rounded-lg" src="<?= base_url('images/' . $data['Gambar_Produk']) ?>" alt="logo" />
             <!-- details items -->
             <div class="flex flex-col gap-4 mx-[21px] mt-[12px] mb-[84px]">
                 <p>Details</p>
@@ -65,6 +65,7 @@
                 <div id="add-to-cart" class="flex flex-row gap-[8px] justify-center items-center w-[148px] h-[37px] rounded-2xl bg-[#8C0B40]"
                     data-produk_id="<?= $data['Produk_id'] ?>"
                     data-nama_produk="<?= $data['Nama_Produk'] ?>"
+                    data-gambar_produk="<?= $data['Gambar_Produk'] ?>"
                     data-rasa="<?= $data['Rasa'] ?>"
                     data-harga="<?= $data['Harga'] ?>"
                 >
@@ -96,6 +97,7 @@ $(document).ready(function() {
   $('#add-to-cart').on('click', function() {
     const productId = $(this).data('produk_id');
     const namaProduk = $(this).data('nama_produk');
+    const gambarProduk = $(this).data('gambar_produk');
     const rasa = $(this).data('rasa');
     const harga = $(this).data('harga');
 
@@ -109,6 +111,7 @@ $(document).ready(function() {
         Produk_id: productId,
         Quantity: quantity,
         Nama_Produk: namaProduk,
+        Gambar_Produk: gambarProduk,
         Rasa: rasa,
         Harga: harga
       });
