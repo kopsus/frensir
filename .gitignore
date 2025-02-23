@@ -62,6 +62,7 @@ $RECYCLE.BIN/
 .env
 .vagrant
 Vagrantfile
+*.zip
 
 #-------------------------
 # Temporary Files

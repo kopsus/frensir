@@ -72,7 +72,7 @@
         </div>
     </div>
     <!-- bottom -->
-     <div class="flex justify-center absolute bottom-0 bg-[#8C0B40] rounded-t-2xl w-full h-[26px]"></div>
+     <!-- <div class="flex justify-center absolute bottom-0 bg-[#8C0B40] rounded-t-2xl w-full h-[26px]"></div> -->
 </div>
 <script>
   $(document).ready(function(){
