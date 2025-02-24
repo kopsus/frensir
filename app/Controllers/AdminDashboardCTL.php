@@ -221,7 +221,7 @@ class AdminDashboardCTL extends BaseController
     }
 
     public function history(){
-        $data = $this->order->orderBy('Order_id', 'DESC')->findAll();
+        $data = $this->order->where('Status', 'success')->orderBy('Order_id', 'DESC')->findAll();
         return view('admin/history', ['activePage' => 'history', 'data' => $data]); 
     }
 
