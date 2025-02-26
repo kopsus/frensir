@@ -25,6 +25,7 @@ class MidtransCTL extends BaseController
         $this->DetailOrder = new \App\Models\OrderDetailsModel();
         $this->sales = new \App\Models\SalesModel();
         $this->sales_detail = new \App\Models\SalesDetailsModel();
+        $this->history = new \App\Models\HistoryModel();
     }
 
     public function index(){
@@ -115,7 +116,12 @@ class MidtransCTL extends BaseController
             return $this->response->setJSON(['error' => 'Data Order tidak ditemukan']);
         }
 
-        // Ambil data detail order berdasarkan order_id
+        $historyData = [
+            'Order_Code' => $orderData['Order_Code'],
+            'Order_Date' => $orderData['Order_Date']
+        ];
+        $this->history->insert($historyData);
+
         $orderDetails = $this->DetailOrder->where('Order_id', $order_id)->findAll();
         if (!$orderDetails) {
             return $this->response->setJSON(['error' => 'Order Details tidak ditemukan']);
@@ -132,7 +138,6 @@ class MidtransCTL extends BaseController
             $subtotal = $detail['Jumlah_Produk'] * $produk['Harga'];
             $totalHarga += $subtotal;
 
-            // Kurangi stok produk
             $newStock = $produk['Stok'] - $detail['Jumlah_Produk'];
             $categoryData = [
                 'Stok' => $newStock

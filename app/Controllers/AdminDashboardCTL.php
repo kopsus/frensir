@@ -12,6 +12,7 @@ class AdminDashboardCTL extends BaseController
         $this->produk = new \App\Models\ProdukModel();
         $this->order = new  \App\Models\OrderModel();
         $this->detail_order = new \App\Models\OrderDetailsModel();
+        $this->history = new \App\Models\HistoryModel();
     }
 
     public function index()
@@ -221,7 +222,7 @@ class AdminDashboardCTL extends BaseController
     }
 
     public function history(){
-        $data = $this->order->where('Status', 'success')->orderBy('Order_id', 'DESC')->findAll();
+        $data = $this->history->orderBy('id', 'DESC')->findAll();
         return view('admin/history', ['activePage' => 'history', 'data' => $data]); 
     }
 
